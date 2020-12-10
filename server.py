@@ -1,11 +1,8 @@
-# 서버소켓의 지속적인 접속 대기 및 클라 접속시 처리용 스레드 생성을 위한 모듈
 from threading import *
 from socket import *
-# gui 환경 세팅 모듈
 from PyQt5.QtCore import Qt, pyqtSignal, QObject
 
-# ServerSocket 클래스가 클라이언트의 접속이나 데이터 수신을 감지한 경우
-# 부모 윈도우로 보낼 사용자 정의 시그널 클래스
+# 서버 소켓에서 정보를 받아 윈도우에 띄워주는 역할
 class Signal(QObject):
     conn_signal = pyqtSignal()
     recv_signal = pyqtSignal(str)
@@ -14,15 +11,15 @@ class Signal(QObject):
 class ServerSocket:
 
     def __init__(self, parent):
-        self.parent = parent
+        self.parent = parent # Signal()에게 정보를 보내주 역할
         self.bListen = False
         self.clients = []
         self.ip = []
         self.threads = []
-
+        # 클래스 끌어와서 객체화 -> 선언된 변수 사용가능
         self.conn = Signal()
         self.recv = Signal()
-
+        # updateClient는 window의 함수인데, 받은 클라를 window에 보여주는 기능임
         self.conn.conn_signal.connect(self.parent.updateClient)
         self.recv.recv_signal.connect(self.parent.updateMsg)
 

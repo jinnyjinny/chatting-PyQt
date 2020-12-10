@@ -7,7 +7,7 @@ import server
 
 QApplication.setAttribute(Qt.AA_EnableHighDpiScaling, True)
 
-port = 5614
+port = 8080
 
 
 class CWidget(QWidget):
