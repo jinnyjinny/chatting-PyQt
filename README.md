@@ -1,4 +1,25 @@
-# 번역 기능이 탑재된 GUI 환경의 채팅 프로그래밍
+## 번역 기능이 탑재된 GUI 환경의 채팅 프로그래밍
+
+### 실행화면 
+- 서버, 클라이언트 채팅 <br>
+<img width="540" src="https://user-images.githubusercontent.com/49601361/103331362-f6c50400-4aa8-11eb-83b4-04437368b0d2.png"><br>
+<br>
+
+- 서버 실행 로그 <br>
+<img width="540" src="https://user-images.githubusercontent.com/49601361/103331406-2542df00-4aa9-11eb-8c0f-83e3129a1a4f.png"><br>
+<br>
+
+- 채팅방 지움 버튼 실행 <br>
+<img width="540" src="https://user-images.githubusercontent.com/49601361/103331409-2b38c000-4aa9-11eb-9f04-cf5bc87209c2.png"><br>
+<br>
+
+- 번역 창 띄우기 <br>
+<img width="540" src="https://user-images.githubusercontent.com/49601361/103331417-31c73780-4aa9-11eb-9b19-77c19d62e9a8.png"><br>
+<br>
+
+- 번역 결과 <br>
+<img width="200" src="https://user-images.githubusercontent.com/49601361/103331424-34c22800-4aa9-11eb-9e2e-c27429e301bb.png"><br>
+<br>
 
 ## PyQt <br>
  파이썬에서 데스크탑 프로그램 혹은 GUI 프로그램을 만들기 위해서 여러 GUI Framework (혹은 Toolkit) 들을 사용할 수 있다. 
@@ -50,24 +71,5 @@ ClientTranslate의 TranslateWindow 클래스를 translateWin객체로 만들어 
   
 ### 2.5 ServerTranslate + ClientTranslate
 메세지를 번역하기 위해 google translator api를 사용한다. google translator api는 google에서 제공하는 유료로 key를 따로 설정하여 동작하는 방식과, 무료로 작동하는 방식이 있다. 해당 api는 무료로 작동하는 api를 사용했다. ‘한국어’, ‘영어’ 두개의 라벨과 한국어를 입력하는 줄 편집기, 영어가 출력되는 텍스트 편집기, 번역하기 버튼을 만들었다. 번역하기 버튼을 클릭하면 self.translate_kor 메서드를 호출시킨다. translate_kor 함수는 한국어를 영어로 번역하여 텍스트 편집기에 보여주는 기능을 한다. 하지만 한 줄을 번역하고 나면 프로그램이 종료된다는 문제점이 있다. 연속된 채팅에도 종료되지 않도록 개선 예정이다. 
-__
-### 3. 실행화면 
-- 서버, 클라이언트 채팅 <br>
-<img width="540" src="https://user-images.githubusercontent.com/49601361/103331362-f6c50400-4aa8-11eb-83b4-04437368b0d2.png"><br>
-<br>
 
-- 서버 실행 로그 <br>
-<img width="540" src="https://user-images.githubusercontent.com/49601361/103331406-2542df00-4aa9-11eb-8c0f-83e3129a1a4f.png"><br>
-<br>
 
-- 채팅방 지움 버튼 실행 <br>
-<img width="540" src="https://user-images.githubusercontent.com/49601361/103331409-2b38c000-4aa9-11eb-9f04-cf5bc87209c2.png"><br>
-<br>
-
-- 번역 창 띄우기 <br>
-<img width="540" src="https://user-images.githubusercontent.com/49601361/103331417-31c73780-4aa9-11eb-9b19-77c19d62e9a8.png"><br>
-<br>
-
-- 번역 결과 <br>
-<img width="200" src="https://user-images.githubusercontent.com/49601361/103331424-34c22800-4aa9-11eb-9e2e-c27429e301bb.png"><br>
-<br>
