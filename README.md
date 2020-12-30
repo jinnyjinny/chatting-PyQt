@@ -21,7 +21,7 @@
 <img width="200" src="https://user-images.githubusercontent.com/49601361/103331424-34c22800-4aa9-11eb-9e2e-c27429e301bb.png"><br>
 <br>
 
-## PyQt <br>
+## 1. PyQt <br>
  파이썬에서 데스크탑 프로그램 혹은 GUI 프로그램을 만들기 위해서 여러 GUI Framework (혹은 Toolkit) 들을 사용할 수 있다. 
  
 ## 2. 클래스 
