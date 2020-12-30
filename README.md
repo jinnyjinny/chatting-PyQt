@@ -69,5 +69,5 @@ Client를 임포트하여ClientSocket 클래스를 객체화하여 재사용한�
 <br>
 
 - 번역 결과
-<img width="540" src="https://user-images.githubusercontent.com/49601361/103331424-34c22800-4aa9-11eb-9e2e-c27429e301bb.png"><br>
+<img width="200" src="https://user-images.githubusercontent.com/49601361/103331424-34c22800-4aa9-11eb-9e2e-c27429e301bb.png"><br>
 <br>
