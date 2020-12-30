@@ -4,10 +4,12 @@ from PyQt5.QtWidgets import *
 import sys
 import socket
 import server
+import serverTranslate
 
 QApplication.setAttribute(Qt.AA_EnableHighDpiScaling, True)
 
 port = 8080
+
 
 
 class CWidget(QWidget):
@@ -54,7 +56,7 @@ class CWidget(QWidget):
         box = QHBoxLayout()
 
         self.guest = QTableWidget()
-        self.guest.setRowCount(5)
+        self.guest.setRowCount(9)
         self.guest.setColumnCount(2)
         self.guest.setHorizontalHeaderItem(0, QTableWidgetItem('ip'))
         self.guest.setHorizontalHeaderItem(1, QTableWidgetItem('port'))
@@ -90,6 +92,10 @@ class CWidget(QWidget):
         self.clearbtn.clicked.connect(self.clearMsg)
         hbox.addWidget(self.clearbtn)
 
+        self.translatebtn = QPushButton('번역하기')
+        self.translatebtn.clicked.connect(self.translateMsg)
+        hbox.addWidget(self.translatebtn)
+
         box.addLayout(hbox)
 
         gb.setLayout(box)
@@ -100,6 +106,7 @@ class CWidget(QWidget):
         vbox.addLayout(infobox)
         self.setLayout(vbox)
 
+        self.translateWin = serverTranslate.TranslateWindow()
         self.show()
 
     def toggleButton(self, state):
@@ -138,8 +145,16 @@ class CWidget(QWidget):
     def clearMsg(self):
         self.msg.clear()
 
+    def translateMsg(self, sendmsg):
+        self.action()
+        self.s.send(sendmsg)
+        # self.msg.clear()
+
     def closeEvent(self, e):
         self.s.stop()
+
+    def action(self):
+        self.translateWin.show()
 
 
 if __name__ == '__main__':

@@ -2,24 +2,23 @@ from threading import *
 from socket import *
 from PyQt5.QtCore import Qt, pyqtSignal, QObject
 
-# 서버 소켓에서 정보를 받아 윈도우에 띄워주는 역할
+# 서버 소켓에서 정보를 받아 윈도우에 띄워주기
 class Signal(QObject):
     conn_signal = pyqtSignal()
     recv_signal = pyqtSignal(str)
 
 
+
 class ServerSocket:
 
     def __init__(self, parent):
-        self.parent = parent # Signal()에게 정보를 보내주 역할
+        self.parent = parent
         self.bListen = False
         self.clients = []
         self.ip = []
         self.threads = []
-        # 클래스 끌어와서 객체화 -> 선언된 변수 사용가능
         self.conn = Signal()
         self.recv = Signal()
-        # updateClient는 window의 함수인데, 받은 클라를 window에 보여주는 기능임
         self.conn.conn_signal.connect(self.parent.updateClient)
         self.recv.recv_signal.connect(self.parent.updateMsg)
 
@@ -46,18 +45,20 @@ class ServerSocket:
         self.bListen = False
         if hasattr(self, 'server'):
             self.server.close()
-            print('Server Stop')
+            print('서버 멈춤')
 
+
+    # 클라이언트가 접속할 때마다 새로운 연결을 반복적으로 생성
     def listen(self, server):
         while self.bListen:
             server.listen(5)
             try:
-                client, addr = server.accept()
+                client, addr = server.accept() # 클라이언트가 접속할 때까지 무한대기
             except Exception as e:
                 print('Accept() Error : ', e)
                 break
             else:
-                self.clients.append(client)
+                self.clients.append(client) # 클라이언트 접속시 accept 함수 탈출
                 self.ip.append(addr)
                 self.conn.conn_signal.emit()
                 t = Thread(target=self.receive, args=(addr, client))
@@ -67,6 +68,8 @@ class ServerSocket:
         self.removeAllClients()
         self.server.close()
 
+
+    # 클라이언트가 접속할 때 마다 생성되는 스레드에 의해 실행되는 함수
     def receive(self, addr, client):
         while True:
             try:
@@ -81,7 +84,7 @@ class ServerSocket:
                     self.recv.recv_signal.emit(msg)
                     print('[RECV]:', addr, msg)
 
-        self.removeCleint(addr, client)
+        self.removeClient(addr, client)
 
     def send(self, msg):
         try:
@@ -90,7 +93,7 @@ class ServerSocket:
         except Exception as e:
             print('Send() Error : ', e)
 
-    def removeCleint(self, addr, client):
+    def removeClient(self, addr, client):
         client.close()
         self.ip.remove(addr)
         self.clients.remove(client)
@@ -117,7 +120,18 @@ class ServerSocket:
 
         self.resourceInfo()
 
+
+
+    def translateLanguage(self, msg):
+        try:
+            for c in self.clients:
+                c.send(msg.encode())
+        except Exception as e:
+            print('Translate() Error : ', e)
+
+
+
     def resourceInfo(self):
-        print('Number of Client ip\t: ', len(self.ip))
-        print('Number of Client socket\t: ', len(self.clients))
-        print('Number of Client thread\t: ', len(self.threads))
+        print('Client ip 개수\t: ', len(self.ip))
+        print('Client socket 개수\t: ', len(self.clients))
+        print('Client thread 개\t: ', len(self.threads))

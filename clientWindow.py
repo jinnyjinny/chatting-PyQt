@@ -78,8 +78,12 @@ class CWidget(QWidget):
         self.clearbtn = QPushButton('채팅창 지움')
         self.clearbtn.clicked.connect(self.clearMsg)
 
+        self.translatebtn = QPushButton('번역하기')
+        self.translatebtn.clicked.connect(self.translateMsg)
+
         hbox.addWidget(self.sendbtn)
         hbox.addWidget(self.clearbtn)
+        hbox.addWidget(self.translatebtn)
         gb.setLayout(box)
 
         # 전체 배치
@@ -121,8 +125,16 @@ class CWidget(QWidget):
     def clearMsg(self):
         self.recvmsg.clear()
 
+    def translateMsg(self, sendmsg):
+        self.action()
+        self.s.send(sendmsg)
+        # self.msg.clear()
+
     def closeEvent(self, e):
         self.c.stop()
+
+    def action(self):
+        self.translateWin.show()
 
 
 if __name__ == '__main__':

@@ -43,7 +43,7 @@ class ClientSocket:
         self.bConnect = False
         if hasattr(self, 'client'):
             self.client.close()
-            del (self.client)
+            del self.client
             print('Client Stop')
             self.disconn.disconnect_signal.emit()
 
